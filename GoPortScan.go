@@ -51,33 +51,48 @@ func init() {
 
 func main() {
 
+	//define array for port range
 	var PORTS []int
 
+	//capture arguments
 	flag.StringVar(&targetIP, "targetIP", "127.0.0.1", "Target IP")
 	flag.IntVar(&startPort, "startPort", 20, "Start Port")
 	flag.IntVar(&endPort, "endPort", 1024, "End Port")
 	flag.Parse()
 
+	//generate a range of ports between start and end port values
 	for i := startPort; i <= endPort; i++ {
 		PORTS = append(PORTS, i)
 	}
+
+	//define a waitGroup
 	var wg sync.WaitGroup
 
+	//iterate through range of ports calling the checkPortOpen function
 	for _, dstPort := range PORTS {
 		wg.Add(1)
 		go checkPortOpen(&wg, strconv.Itoa(dstPort))
 	}
+
+	//waiting for all goroutines to finish
 	wg.Wait()
 }
 
 func checkPortOpen(wg *sync.WaitGroup, port string) {
+
+	//deferring wait group for done
 	defer wg.Done()
 
+	//connects to the address on the target network
 	_, err := net.Dial("tcp", targetIP+":"+port)
+
+	//handle any error
 	if err != nil {
+		//TODO
 		//log.Printf("Port %s closed", port)
 
 	} else {
+		//write out to console if port is open
 		log.Printf("Port %s open", port)
 	}
 }
