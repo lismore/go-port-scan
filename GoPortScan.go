@@ -10,7 +10,6 @@ import (
 	"sync"
 
 	"github.com/fatih/color"
-	_ "github.com/google/gopacket/layers"
 )
 
 var (
