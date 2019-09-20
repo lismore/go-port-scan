@@ -11,7 +11,7 @@ go build GoPortScan.go
 ## Running
 
 ```CMD
-GoPortScan.exe -targetIP=127.0.0.1 -startPort=20 -endPort=65000
+GoPortScan.exe -targetIP=127.0.0.1 -startPort=20 -endPort=1024
 ```
 ## Contributing
 
