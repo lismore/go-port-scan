@@ -1,6 +1,6 @@
 # Go Port Scan
 
-A simple and fast SYN port scanner implemented in GO.
+A simple and fast Go implemented port scanner.
 
 ## Building/Compiling EXE
 
